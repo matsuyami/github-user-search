@@ -1,0 +1,23 @@
+:root {
+  --bg-clr:             #F6F8FF;
+  --date-clr:           #697C9A; 
+  --button-clr:         #0079FF;
+  --primary-clr:        #FEFEFE;
+  --primary-font-clr:   #4B6A9B;
+  --secondary-font-clr: #2B3442;
+
+  --spacer-sm:     0.5rem;
+  --spacer-md:     1.0rem;
+  --spacer-lg:     1.5rem;
+  --spacer-xl:     2.0rem;
+}
+
+.theme-dark {
+  --bg-clr:             #FFFFFF;
+  --date-clr:           #FFFFFF;
+  --button-clr:         #0079FF;
+  --primary-clr:        #1E2A47;
+  --primary-font-clr:   #FFFFFF;
+  --secondary-font-clr: #FFFFFF;
+}
+
