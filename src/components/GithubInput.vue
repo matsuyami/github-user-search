@@ -12,15 +12,18 @@
      />
     <button class='searchForm__button'>Search</button>
   </form>
+  <GithubProfile/>
 </template>
 
 <script>
 import ThemeSwitcher from './ThemeSwitcher.vue'
+import GithubProfile from './GithubProfile.vue'
 
 export default {
   name: 'GithubInput',
   components: {
     ThemeSwitcher,
+    GithubProfile,
   }
 }
 </script>
@@ -43,7 +46,7 @@ export default {
     padding: var(--spacer-lg) var(--spacer-md); 
     border-radius: var(--br);
     border: 1px solid var(--primary-clr);
-    box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+    box-shadow: var(--box-shadow); 
     color: var(--primary-font-clr);
     padding-left: calc(var(--spacer-md) + var(--spacer-lg));
   }

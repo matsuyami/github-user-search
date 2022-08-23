@@ -1,5 +1,5 @@
 <template>
-  <main id='app theme-dark'>
+  <main id='app'>
     <GithubInput/>
   </main>
 </template>

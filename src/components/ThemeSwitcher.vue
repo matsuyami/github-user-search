@@ -26,13 +26,13 @@ export default {
 
   .theme__heading{
     color: var(--secondary-font-clr);
+    font-size: var(--h1-fs);
   }
 
   .theme__switcher {
     display: flex;
     align-items: center;
   }
-
 
   .theme__type {
     text-transform: uppercase;
