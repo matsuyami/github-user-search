@@ -1,6 +1,6 @@
 <template>
   <ThemeSwitcher/>
-  <form class='searchForm'>
+  <form class='searchForm' @submit.prevent>
     <picture class='searchForm__picture'>
       <img class='searchForm__img' src='../assets/img/icon-search.svg'/>
     </picture> 
@@ -9,26 +9,65 @@
        type='text' 
        placeholder='Search Github username... '
        name='query'
+       v-model='query'
      />
-    <button class='searchForm__button'>Search</button>
+    <button @click='getGithubUserData' class='searchForm__button'>Search</button>
   </form>
-  <GithubProfile/>
+  <GithubProfile :github-profile-data='githubProfileData'/>
 </template>
 
 <script>
 import ThemeSwitcher from './ThemeSwitcher.vue'
 import GithubProfile from './GithubProfile.vue'
+import { Octokit } from 'octokit'
 
 export default {
   name: 'GithubInput',
   components: {
     ThemeSwitcher,
     GithubProfile,
-  }
+  },
+
+  data() {
+    return {
+      query: '',
+      githubProfileData: {
+        avatar_url: require('../assets/img/octocat.png'),
+        created_at: new Date('January 25, 2021'),
+        login: 'The Octocat',
+        name: '@octocat',
+        bio: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+              Donec odio. Quisque volutpat mattis eros.`,
+        public_repos: 8,
+        followers: 3938,
+        following: 9,
+        location: 'San Francisco',
+        twitter_username: 'Not Available',
+        company: '@github',
+        blog: 'https://github.blog',
+      }
+    }  
+  },
+
+  methods: {
+    async getGithubUserData(){
+      const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
+      const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
+      const response = await octokit.request('GET /users/{username}', {
+        username: this.query 
+      })
+      this.githubProfileData = response.data
+      this.githubProfileData.created_at = new Date(response.data.created_at)
+    },
+  },
 }
 </script>
 
 <style>
+  .searchForm{ 
+    position: relative; 
+  }
+
   .searchForm__img{
     position: absolute;
     top: 0;
@@ -37,9 +76,7 @@ export default {
     margin: auto 0;
 
   }
-  .searchForm{ 
-    position: relative; 
-  }
+
   .searchForm__input{
     width: 100%;
     background-color: var(--primary-clr);

@@ -1,6 +1,8 @@
 <template>
   <main id='app'>
+  <Suspense>
     <GithubInput/>
+  </Suspense>
   </main>
 </template>
 

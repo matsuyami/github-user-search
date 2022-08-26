@@ -2,66 +2,72 @@
   <section class='profile'>
     <div class='profile__info'>
       <picture class='profile__picture'>
-        <img class='profile__img' src='../assets/img/octocat.png' />
+        <img class='profile__img' :src='githubProfileData.avatar_url'/>
       </picture>
       <div class='profile__name'>
-        <h2 class='profile__heading'> The Octocat </h2>   
-        <a class='profile__link' href='#'>@octocat</a>
-        <div class='profile__date'>Joined 25 Jan 2011</div>
+        <h2 class='profile__heading'>{{githubProfileData.login}}</h2>   
+        <a class='profile__link' href='#'>{{githubProfileData.name}}</a>
+        <div class='profile__date'>Joined 
+        {{ githubProfileData.created_at.getDate() }}
+        {{ githubProfileData.created_at
+            .toLocaleString('default', {'month': 'short'})
+        }}
+        {{ githubProfileData.created_at.getFullYear() }} 
+        </div>
       </div>
     </div>
     <div class='profile__description'>
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
+      {{githubProfileData.bio}}
     </div>
 
     <div class='profile__stats'>
       <div class='profile__repos'>
         <div class='profile__statText'>Repos</div>
-        <div class='profile__statNum'>8</div>
+        <div class='profile__statNum'>{{githubProfileData.public_repos}}</div>
       </div>
       <div class='profile__followers'>
         <div class='profile__statText'>Followers</div>
-        <div class='profile__statNum'>3938</div>
+        <div class='profile__statNum'>{{githubProfileData.followers}}</div>
       </div>
       <div class='profile__following'>
         <div class='profile__statText'>Following</div>
-        <div class='profile__statNum'>9</div>
+        <div class='profile__statNum'>{{githubProfileData.following}}</div>
       </div>
     </div>
 
-    <div class='profile__links'>
-      <div class='profile__linkDetail'>
+    <div class='profile__userInfo'>
+      <div class='profile__userDetail'>
         <picture>
-          <img class='profile__linkImg' 
+          <img class='profile__userInfoImg' 
             src='../assets/img/icon-location.svg' alt='location'/>
         </picture>
-        <div class='profile__linkInfo'>San Francisco</div>
+        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.location)}}</div>
         
       </div>
-      <div class='profile__linkDetail'>
+      <div class='profile__userDetail'>
         <picture>
-          <img class='profile__linkImg' 
+          <img class='profile__userInfoImg' 
             src='../assets/img/icon-website.svg' alt='website'/>
         </picture>
-        <div class='profile__linkInfo'>
-          <a href='#'>https://github.blog</a>
+        <div class='profile__userDetailInfo'>
+          <a :href='isValidUserInfo(githubProfileData.blog)'>{{isValidUserInfo(githubProfileData.blog)}}</a>
         </div>
 
       </div>
-      <div class='profile__linkDetail'>
+      <div class='profile__userDetail'>
         <picture>
-          <img class='profile__linkImg' 
+          <img class='profile__userInfoImg' 
             src='../assets/img/icon-twitter.svg' alt='twitter'/>
         </picture>
-        <div class='profile__linkInfo'>Not Available</div>
+        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.twitter_username)}}</div>
 
       </div>
-      <div class='profile__linkDetail'>
+      <div class='profile__userDetail'>
         <picture>
-          <img class='profile__linkImg' 
+          <img class='profile__userInfoImg' 
             src='../assets/img/icon-company.svg' alt='work'/>
         </picture>
-        <div class='profile__linkInfo'>@github</div>
+        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.company)}}</div>
 
       </div>
     </div>
@@ -71,6 +77,12 @@
 <script>
 export default {
   name: 'GithubProfile',
+  props: ['githubProfileData'],
+  methods: {
+    isValidUserInfo(info) {
+      return (info === null || info === '') ? 'Not Available' : info
+    }
+  }
 }
 </script>
 
@@ -135,29 +147,29 @@ export default {
     margin-top: var(--spacer-md);
   }
 
-  .profile__links {
+  .profile__userInfo {
     display: flex;
     flex-direction: column;
     margin-top: var(--spacer-lg);
   }
 
 
-  .profile__linkDetail {
+  .profile__userDetail{
     display: flex;
     flex-direction: row;
     margin-top: var(--spacer-xs);
   }
 
-  .profile__linkImg {
+  .profile__userInfoImg{
     width: var(--spacer-lg); 
     height: var(--spacer-lg); 
     object-fit: contain;
   }
-  .profile__linkInfo {
+  .profile__userDetailInfo{
     margin-left: var(--spacer-md);
   }
 
-  .profile__linkInfo > a {
+  .profile__userDetailInfo > a {
     text-decoration: none;
     color: var(--primary-font-clr);
   }
