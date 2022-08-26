@@ -6,7 +6,7 @@
       </picture>
       <div class='profile__name'>
         <h2 class='profile__heading'>{{githubProfileData.login}}</h2>   
-        <a class='profile__link' href='#'>{{githubProfileData.name}}</a>
+        <a class='profile__link' href='#'>@{{githubProfileData.name}}</a>
         <div class='profile__date'>Joined 
         {{ githubProfileData.created_at.getDate() }}
         {{ githubProfileData.created_at
@@ -38,37 +38,46 @@
     <div class='profile__userInfo'>
       <div class='profile__userDetail'>
         <picture>
-          <img class='profile__userInfoImg' 
+          <img :class='{inactive: !isValidUserInfo(githubProfileData.location)}'
+                class='profile__userInfoImg' 
             src='../assets/img/icon-location.svg' alt='location'/>
         </picture>
-        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.location)}}</div>
+        <div :class='{inactive: !isValidUserInfo(githubProfileData.location)}' 
+              class='profile__userDetailInfo'>
+                {{showUserInfo(githubProfileData.location)}}
+        </div>
         
       </div>
       <div class='profile__userDetail'>
         <picture>
-          <img class='profile__userInfoImg' 
+          <img :class='{inactive: !isValidUserInfo(githubProfileData.blog)}'
+                class='profile__userInfoImg' 
             src='../assets/img/icon-website.svg' alt='website'/>
         </picture>
-        <div class='profile__userDetailInfo'>
-          <a :href='isValidUserInfo(githubProfileData.blog)'>{{isValidUserInfo(githubProfileData.blog)}}</a>
+        <div :class='{inactive: !isValidUserInfo(githubProfileData.blog)}'
+              class='profile__userDetailInfo'>
+          <a :href='showUserInfo(githubProfileData.blog)'>{{showUserInfo(githubProfileData.blog)}}</a>
         </div>
 
       </div>
       <div class='profile__userDetail'>
         <picture>
-          <img class='profile__userInfoImg' 
+          <img :class='{inactive: !isValidUserInfo(githubProfileData.twitter_username)}' 
+                class='profile__userInfoImg' 
             src='../assets/img/icon-twitter.svg' alt='twitter'/>
         </picture>
-        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.twitter_username)}}</div>
+        <div :class='{inactive: !isValidUserInfo(githubProfileData.twitter_username)}' 
+              class='profile__userDetailInfo'>{{showUserInfo(githubProfileData.twitter_username)}}</div>
 
       </div>
       <div class='profile__userDetail'>
         <picture>
-          <img class='profile__userInfoImg' 
+          <img :class='{inactive: !isValidUserInfo(githubProfileData.company)}' 
+                class='profile__userInfoImg' 
             src='../assets/img/icon-company.svg' alt='work'/>
         </picture>
-        <div class='profile__userDetailInfo'>{{isValidUserInfo(githubProfileData.company)}}</div>
-
+        <div :class='{inactive: !isValidUserInfo(githubProfileData.company)}' 
+              class='profile__userDetailInfo'>{{showUserInfo(githubProfileData.company)}}</div>
       </div>
     </div>
   </section>
@@ -80,13 +89,16 @@ export default {
   props: ['githubProfileData'],
   methods: {
     isValidUserInfo(info) {
-      return (info === null || info === '') ? 'Not Available' : info
+      return (info === null || info === '') ? false : true 
+    },
+    showUserInfo(info){
+      return (this.isValidUserInfo(info)) ? info : 'Not Available'
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
   .profile {
     width: 100%;
     background-color: var(--primary-clr);
@@ -173,5 +185,10 @@ export default {
     text-decoration: none;
     color: var(--primary-font-clr);
   }
+
+  .inactive{
+    opacity: 0.5;
+  }
+
 
 </style>

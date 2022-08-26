@@ -35,7 +35,7 @@ export default {
         avatar_url: require('../assets/img/octocat.png'),
         created_at: new Date('January 25, 2021'),
         login: 'The Octocat',
-        name: '@octocat',
+        name: 'octocat',
         bio: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
               Donec odio. Quisque volutpat mattis eros.`,
         public_repos: 8,
