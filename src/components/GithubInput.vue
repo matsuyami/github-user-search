@@ -122,4 +122,14 @@ export default {
     top: 1.1rem;
     right: 6rem;
   }
+
+  @media screen and (min-width: 767px){
+    .searchForm__img {
+      padding-left: 1rem;
+    }
+
+    .searchForm__input {
+      padding-left: calc(var(--spacer-2xl) + var(--spacer-2xl));
+    }
+  }
 </style>

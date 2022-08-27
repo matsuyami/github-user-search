@@ -40,4 +40,20 @@ export default {
     background-color: var(--bg-clr);
     color: var(--primary-font-clr);
   }
+
+  @media screen and (min-width: 767px){
+    #app {
+      max-width: 38rem;
+    }
+
+    body {
+      align-items: center;
+    }
+  }
+
+  @media screen and (min-width: 1023px){
+    #app {
+      max-width: 45rem;
+    }
+  }
 </style>

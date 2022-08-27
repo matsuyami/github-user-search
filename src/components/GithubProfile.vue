@@ -5,7 +5,7 @@
         <img class='profile__img' :src='githubProfileData.avatar_url'/>
       </picture>
       <div class='profile__name'>
-        <h2 class='profile__heading'>{{githubProfileData.name}}</h2>   
+        <h1 class='profile__heading'>{{githubProfileData.name}}</h1>   
         <a class='profile__link' 
             :href="'https://github.com/' + githubProfileData.login">
             @{{githubProfileData.login}}
@@ -121,7 +121,6 @@ export default {
   .profile__name {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     margin-left: var(--spacer-lg);   
   }
   
@@ -199,6 +198,67 @@ export default {
 
   .inactive{
     opacity: 0.5;
+  }
+
+  @media screen and (min-width: 767px){
+    .profile {
+      padding: var(--spacer-2xl) var(--spacer-2xl);
+    }
+
+    .profile__name {
+      margin-left: var(--spacer-2xl);
+    }
+
+    .profile__heading{ 
+      font-size: var(--h1-fs); 
+    }
+    
+    .profile__img{
+      max-width: 7.3125rem;
+    }
+
+    .profile__userInfo {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 40px 40px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    .profile__name {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      grid-template-rows: repeat(2, 0.4fr);
+    }
+
+    .profile__heading {
+      max-height: 3rem;
+      order: 1;
+    }
+
+    .profile__date {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; 
+      order: 2;
+      max-height: 3rem;
+    }
+
+    .profile__link {
+      order: 3;
+    }
+
+    .profile__description, .profile__stats, .profile__userInfo{
+      margin-left: auto;
+      max-width: calc(100% - 150px)
+    }
+
+    .profile__userDetail:nth-last-child(-n + 2) {
+      margin-left: var(--spacer-2xl);
+    }
   }
 
 
