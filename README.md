@@ -1,24 +1,23 @@
-# github-user-search
+# Frontend Mentor - Github User Search App
 
-## Project setup
-```
-yarn install
-```
+## Overview
+A small web app made using Vue 3.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### Links
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- Solution URL: [click here](https://github.com/matsuyami/github-user-search/)
+- Live Site URL: [click here](https://matsuyami.github.io/github-user-search/)
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Built with
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Vue 3
+- Mobile-first workflow
+
+## Author
+
+- Frontend Mentor - [@matsuyami](https://www.frontendmentor.io/profile/matsuyami)
+
+
+## Suggestions 
+
+I'm always open to suggestions so be sure to message me if you think I should've done something a different way (:
