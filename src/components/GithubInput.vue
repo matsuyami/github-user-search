@@ -12,7 +12,7 @@
        v-model='query'
      />
     <button @click='getGithubUserData' class='searchForm__button'>Search</button>
-    <!-- <span class='searchForm__error'>No results</span> -->
+    <span v-if='error' class='searchForm__error'>No results</span>
   </form>
   <GithubProfile :github-profile-data='githubProfileData'/>
 </template>
@@ -46,8 +46,9 @@ export default {
         twitter_username: 'Not Available',
         company: '@github',
         blog: 'https://github.blog',
-      }
-    }  
+      },
+      error: null, 
+    }
   },
 
   methods: {
@@ -63,7 +64,7 @@ export default {
         console.log(this.githubProfileData)
       } catch (error){
         if(error.status === 404){
-          console.log(error.status)            
+          error = error.status
         } 
       }
     },
@@ -111,6 +112,8 @@ export default {
 
   .searchForm__error{
     position: absolute;
+    background-color: var(--primary-clr);
+    padding-left: 0.3rem;
     color: red;
     top: 1.1rem;
     right: 6rem;
