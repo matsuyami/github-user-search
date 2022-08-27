@@ -12,7 +12,7 @@
        v-model='query'
      />
     <button @click='getGithubUserData' class='searchForm__button'>Search</button>
-    <span v-if='error' class='searchForm__error'>No results</span>
+    <span v-if='err' class='searchForm__error'>No results</span>
   </form>
   <GithubProfile :github-profile-data='githubProfileData'/>
 </template>
@@ -47,12 +47,13 @@ export default {
         company: '@github',
         blog: 'https://github.blog',
       },
-      error: null, 
+      err: null, 
     }
   },
 
   methods: {
     async getGithubUserData(){
+      this.err = null
       const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
       const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
       try {
@@ -61,10 +62,9 @@ export default {
         })
         this.githubProfileData = response.data
         this.githubProfileData.created_at = new Date(response.data.created_at)
-        console.log(this.githubProfileData)
       } catch (error){
         if(error.status === 404){
-          error = error.status
+          this.err = error.status == 404
         } 
       }
     },
