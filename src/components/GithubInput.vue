@@ -12,6 +12,7 @@
        v-model='query'
      />
     <button @click='getGithubUserData' class='searchForm__button'>Search</button>
+    <!-- <span class='searchForm__error'>No results</span> -->
   </form>
   <GithubProfile :github-profile-data='githubProfileData'/>
 </template>
@@ -34,8 +35,8 @@ export default {
       githubProfileData: {
         avatar_url: require('../assets/img/octocat.png'),
         created_at: new Date('January 25, 2021'),
-        login: 'The Octocat',
-        name: 'octocat',
+        name: 'The Octocat',
+        login: 'octocat',
         bio: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
               Donec odio. Quisque volutpat mattis eros.`,
         public_repos: 8,
@@ -53,11 +54,18 @@ export default {
     async getGithubUserData(){
       const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
       const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
-      const response = await octokit.request('GET /users/{username}', {
-        username: this.query 
-      })
-      this.githubProfileData = response.data
-      this.githubProfileData.created_at = new Date(response.data.created_at)
+      try {
+        const response = await octokit.request('GET /users/{username}', {
+          username: this.query 
+        })
+        this.githubProfileData = response.data
+        this.githubProfileData.created_at = new Date(response.data.created_at)
+        console.log(this.githubProfileData)
+      } catch (error){
+        if(error.status === 404){
+          console.log(error.status)            
+        } 
+      }
     },
   },
 }
@@ -99,5 +107,12 @@ export default {
     border: 0;
     top: 0.5rem;
     right: 0.45rem;
+  }
+
+  .searchForm__error{
+    position: absolute;
+    color: red;
+    top: 1.1rem;
+    right: 6rem;
   }
 </style>

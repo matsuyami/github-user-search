@@ -1,10 +1,11 @@
 <template>
   <section class='theme'> 
     <h1 class='theme__heading'> devfinder </h1>
-    <div class='theme__switcher'>
-      <span class='theme__type'>dark</span>
+    <div @click='changeTheme' class='theme__switcher'>
+      <span class='theme__type'>{{nextTheme}}</span>
       <picture class='theme__picture'>
-        <img class='theme__img' src='../assets/img/icon-moon.svg'/> 
+        <img v-if='nextTheme === "dark"' class='theme__img' src='../assets/img/icon-moon.svg'/> 
+        <img v-else class='theme__img' src='../assets/img/icon-sun.svg'/> 
       </picture>
     </div>
   </section>
@@ -13,6 +14,27 @@
 <script>
 export default {
   name: 'ThemeSwitcher',
+  data() {
+    return {
+      nextTheme: 'dark'
+    }
+  },
+  methods: {
+    changeTheme(){
+      switch(this.nextTheme){
+        case 'dark':
+          this.nextTheme = 'light'
+          document.body.classList.add('dark')
+          break
+        case 'light':
+          this.nextTheme = 'dark'
+          document.body.classList.remove('dark')
+          break;
+      }
+    }
+  },
+
+
 }
 </script>
 
@@ -32,6 +54,11 @@ export default {
   .theme__switcher {
     display: flex;
     align-items: center;
+    cursor: pointer;
+  }
+
+  .theme__switcher:hover{
+    filter: brightness(0.5);
   }
 
   .theme__type {
@@ -44,4 +71,5 @@ export default {
   .theme__img {
     vertical-align: sub;
   }
+
 </style>

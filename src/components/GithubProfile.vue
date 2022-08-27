@@ -5,8 +5,11 @@
         <img class='profile__img' :src='githubProfileData.avatar_url'/>
       </picture>
       <div class='profile__name'>
-        <h2 class='profile__heading'>{{githubProfileData.login}}</h2>   
-        <a class='profile__link' href='#'>@{{githubProfileData.name}}</a>
+        <h2 class='profile__heading'>{{githubProfileData.name}}</h2>   
+        <a class='profile__link' 
+            :href="'https://github.com/' + githubProfileData.login">
+            @{{githubProfileData.login}}
+          </a>
         <div class='profile__date'>Joined 
         {{ githubProfileData.created_at.getDate() }}
         {{ githubProfileData.created_at
@@ -163,8 +166,8 @@ export default {
     display: flex;
     flex-direction: column;
     margin-top: var(--spacer-lg);
+    cursor: pointer;
   }
-
 
   .profile__userDetail{
     display: flex;
@@ -185,6 +188,11 @@ export default {
     text-decoration: none;
     color: var(--primary-font-clr);
   }
+
+  .profile__userDetailInfo:not(.inactive) > a:hover {
+    text-decoration: underline;
+  }
+
 
   .inactive{
     opacity: 0.5;
