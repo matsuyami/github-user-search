@@ -168,7 +168,6 @@ export default {
     display: flex;
     flex-direction: column;
     margin-top: var(--spacer-lg);
-    cursor: pointer;
   }
 
   .profile__userDetail{
@@ -187,6 +186,7 @@ export default {
   }
 
   .profile__userDetailInfo > a {
+    cursor: pointer;
     text-decoration: none;
     color: var(--primary-font-clr);
   }
