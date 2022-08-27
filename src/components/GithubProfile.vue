@@ -231,11 +231,10 @@ export default {
     .profile__name {
       display: grid;
       grid-template-columns: 1fr 1.8fr;
-      grid-template-rows: repeat(2, 0.4fr);
+      grid-template-rows: repeat(2, fit-content(100%));
     }
 
     .profile__heading {
-      max-height: 3rem;
       order: 1;
     }
 
@@ -254,6 +253,14 @@ export default {
     .profile__description, .profile__stats, .profile__userInfo{
       margin-left: auto;
       max-width: calc(100% - 150px)
+    }
+
+    .profile__stats {
+      margin-top: var(--spacer-2xl);
+    }
+
+    .profile__description {
+      margin-top: -2rem;
     }
 
     .profile__userDetail:nth-last-child(-n + 2) {
