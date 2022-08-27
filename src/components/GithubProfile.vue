@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class='profile__description'>
-      {{githubProfileData.bio}}
+      {{showUserBio(githubProfileData.bio)}}
     </div>
 
     <div class='profile__stats'>
@@ -96,7 +96,10 @@ export default {
     },
     showUserInfo(info){
       return (this.isValidUserInfo(info)) ? info : 'Not Available'
-    }
+    },
+    showUserBio(bio) {
+      return (bio === null) ? 'This profile has no bio available.' : bio;
+    },
   }
 }
 </script>

@@ -37,8 +37,7 @@ export default {
         created_at: new Date('January 25, 2021'),
         name: 'The Octocat',
         login: 'octocat',
-        bio: `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              Donec odio. Quisque volutpat mattis eros.`,
+        bio: 'This profile has no bio available.',
         public_repos: 8,
         followers: 3938,
         following: 9,
@@ -102,12 +101,17 @@ export default {
     background-color: var(--button-clr);
     padding: var(--spacer-sm) var(--spacer-sm); 
     border-radius: var(--br); 
+    cursor: pointer;
     color: var(--white);
     font-weight: var(--fw-bold);
     font-size: inherit;
     border: 0;
     top: 0.5rem;
     right: 0.45rem;
+  }
+
+  .searchForm__button:hover {
+    opacity: 0.5;
   }
 
   .searchForm__error{
