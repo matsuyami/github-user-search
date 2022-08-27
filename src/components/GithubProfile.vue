@@ -222,7 +222,6 @@ export default {
       grid-auto-flow: column;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 40px 40px;
-      align-items: center;
       justify-content: center;
     }
   }
