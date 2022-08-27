@@ -195,7 +195,6 @@ export default {
     text-decoration: underline;
   }
 
-
   .inactive{
     opacity: 0.5;
   }
