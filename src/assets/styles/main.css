@@ -33,7 +33,7 @@
   
 }
 
-.dark{
+.dark {
   --bg-clr:             #141D2F;
   --date-clr:           #FFFFFF;
   --button-clr:         #0079FF;
@@ -42,3 +42,11 @@
   --secondary-font-clr: #FFFFFF;
 }
 
+.light {
+  --bg-clr:             #F6F8FF;
+  --date-clr:           #697C9A; 
+  --button-clr:         #0079FF;
+  --primary-clr:        #FEFEFE;
+  --primary-font-clr:   #4B6A9B;
+  --secondary-font-clr: #2B3442;
+}

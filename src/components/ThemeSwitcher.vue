@@ -2,9 +2,12 @@
   <section class='theme'> 
     <h1 class='theme__heading'> devfinder </h1>
     <div @click='changeTheme' class='theme__switcher'>
-      <span class='theme__type'>{{nextTheme}}</span>
+      <span class='theme__type'>
+        <span v-if='currentTheme ==="light"'>dark</span>
+        <span v-else>light</span>
+      </span>
       <picture class='theme__picture'>
-        <img v-if='nextTheme === "dark"' class='theme__img' src='../assets/img/icon-moon.svg'/> 
+        <img v-if='currentTheme === "light"' class='theme__img' src='../assets/img/icon-moon.svg'/> 
         <img v-else class='theme__img' src='../assets/img/icon-sun.svg'/> 
       </picture>
     </div>
@@ -16,22 +19,46 @@ export default {
   name: 'ThemeSwitcher',
   data() {
     return {
-      nextTheme: 'dark'
+      currentTheme: this.initializeTheme(),  
     }
-  },
+  }, 
   methods: {
+     initializeTheme() {
+       const storedTheme = this.getStoredTheme()
+       document.body.classList.add(storedTheme)
+       return storedTheme
+     },
+
+     getStoredTheme() {
+       const defaultTheme='light'
+       const key = 'theme'
+       const currentTheme = localStorage.getItem(key)
+       return (currentTheme) ? currentTheme : defaultTheme 
+     },
+
+     setStoredTheme(currentTheme) {
+       const key = 'theme'
+       localStorage.setItem(key, currentTheme)
+     },
+
     changeTheme(){
-      switch(this.nextTheme){
-        case 'dark':
-          this.nextTheme = 'light'
-          document.body.classList.add('dark')
-          break
-        case 'light':
-          this.nextTheme = 'dark'
-          document.body.classList.remove('dark')
+      const light = 'light'
+      const dark = 'dark'
+      switch(this.currentTheme){
+        case light:
+          this.swapThemeClasses(dark)
           break;
+        case dark:
+          this.swapThemeClasses(light)
+          break
       }
-    }
+    },
+     swapThemeClasses(newTheme) {
+       document.body.classList.remove(this.currentTheme)
+       this.currentTheme = newTheme 
+       document.body.classList.add(newTheme)
+       this.setStoredTheme(this.currentTheme)
+     }
   },
 
 
