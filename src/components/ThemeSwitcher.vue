@@ -7,8 +7,8 @@
         <span v-else>light</span>
       </span>
       <picture class='theme__picture'>
-        <img v-if='currentTheme === "light"' class='theme__img' src='../assets/img/icon-moon.svg'/> 
-        <img v-else class='theme__img' src='../assets/img/icon-sun.svg'/> 
+        <img v-if='currentTheme === "light"' class='theme__img' src='../assets/img/icon-moon.svg' alt='moon'/> 
+        <img v-else class='theme__img' src='../assets/img/icon-sun.svg' alt='sun'/> 
       </picture>
     </div>
   </section>

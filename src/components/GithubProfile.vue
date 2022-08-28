@@ -2,7 +2,7 @@
   <section class='profile'>
     <div class='profile__info'>
       <picture class='profile__picture'>
-        <img class='profile__img' :src='githubProfileData.avatar_url'/>
+        <img class='profile__img' :src='githubProfileData.avatar_url' alt='github-profile-img'/>
       </picture>
       <div class='profile__name'>
         <h1 class='profile__heading'>{{githubProfileData.name}}</h1>   

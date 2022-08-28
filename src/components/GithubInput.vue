@@ -2,7 +2,7 @@
   <ThemeSwitcher/>
   <form class='searchForm' @submit.prevent>
     <picture class='searchForm__picture'>
-      <img class='searchForm__img' src='../assets/img/icon-search.svg'/>
+      <img class='searchForm__img' src='../assets/img/icon-search.svg' alt='search-icon'/>
     </picture> 
     <input 
        class='searchForm__input' 
