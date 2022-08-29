@@ -12,63 +12,49 @@
        v-model='query'
      />
     <button @click='getGithubUserData' class='searchForm__button'>Search</button>
-    <span v-if='err' class='searchForm__error'>No results</span>
+    <span v-if='isError' class='searchForm__error'>No results</span>
   </form>
   <GithubProfile :github-profile-data='githubProfileData'/>
 </template>
 
-<script>
-import ThemeSwitcher from './ThemeSwitcher.vue'
-import GithubProfile from './GithubProfile.vue'
-import { Octokit } from 'octokit'
+<script setup>
+  import ThemeSwitcher from './ThemeSwitcher.vue'
+  import GithubProfile from './GithubProfile.vue'
+  import { Octokit } from 'octokit'
+  import { ref, reactive } from 'vue'
 
-export default {
-  name: 'GithubInput',
-  components: {
-    ThemeSwitcher,
-    GithubProfile,
-  },
+  const query = ref('') 
+  const isError = ref(null)
 
-  data() {
-    return {
-      query: '',
-      githubProfileData: {
-        avatar_url: require('../assets/img/octocat.png'),
-        created_at: new Date('January 25, 2021'),
-        name: 'The Octocat',
-        login: 'octocat',
-        bio: 'This profile has no bio available.',
-        public_repos: 8,
-        followers: 3938,
-        following: 9,
-        location: 'San Francisco',
-        twitter_username: 'Not Available',
-        company: '@github',
-        blog: 'https://github.blog',
-      },
-      err: null, 
+  const githubProfileData = reactive({
+    avatar_url: require('../assets/img/octocat.png'),
+    created_at: new Date('January 25, 2021'),
+    name: 'The Octocat',
+    login: 'octocat',
+    bio: 'This profile has no bio available.',
+    public_repos: 8,
+    followers: 3938,
+    following: 9,
+    location: 'San Francisco',
+    twitter_username: 'Not Available',
+    company: '@github',
+    blog: 'https://github.blog',
+  })
+
+  const getGithubUserData = async () => {
+    isError.value = null
+    const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
+    const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
+    try {
+      const response = await octokit.request('GET /users/{username}', {
+        username: query.value
+      })
+      Object.assign(githubProfileData, response.data)
+      githubProfileData.created_at = new Date(response.data.created_at)
+    } catch (error){
+        isError.value = error.status == 404
     }
-  },
-
-  methods: {
-    async getGithubUserData(){
-      this.err = null
-      const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
-      const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
-      try {
-        const response = await octokit.request('GET /users/{username}', {
-          username: this.query 
-        })
-        this.githubProfileData = response.data
-        this.githubProfileData.created_at = new Date(response.data.created_at)
-      } catch (error){
-        if(error.status === 404){
-          this.err = error.status == 404
-        } 
-      }
-    },
-  },
-}
+  }
 </script>
 
 <style>
