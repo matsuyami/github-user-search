@@ -271,6 +271,7 @@
       display: grid;
       grid-template-columns: 1fr 1.8fr;
       grid-template-rows: repeat(2, fit-content(100%));
+      width: 100%;
     }
 
     .profile__heading {
