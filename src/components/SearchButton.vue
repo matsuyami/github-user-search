@@ -1,5 +1,7 @@
 <template>
-  <button class='searchForm__button'>Search</button>
+  <button class="searchForm__button">
+    Search
+  </button>
 </template>
 
 <script>

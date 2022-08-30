@@ -1,8 +1,8 @@
 <template>
   <main>
-  <Suspense>
-    <GithubInput/>
-  </Suspense>
+    <Suspense>
+      <GithubInput />
+    </Suspense>
   </main>
 </template>
 

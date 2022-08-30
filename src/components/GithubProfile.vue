@@ -1,107 +1,148 @@
 <template>
-  <section class='profile'>
-    <div class='profile__info'>
-      <picture class='profile__picture'>
-        <img class='profile__img' :src='githubProfileData.avatar_url' alt='github-profile-img'/>
+  <section class="profile">
+    <div class="profile__info">
+      <picture class="profile__picture">
+        <img
+          class="profile__img"
+          :src="props.githubProfileData.avatar_url"
+          alt="github-profile-img"
+        >
       </picture>
-      <div class='profile__name'>
-        <h1 class='profile__heading'>{{githubProfileData.name}}</h1>   
-        <a class='profile__link' 
-            :href="'https://github.com/' + githubProfileData.login">
-            @{{githubProfileData.login}}
-          </a>
-        <div class='profile__date'>Joined 
-        {{ githubProfileData.created_at.getDate() }}
-        {{ githubProfileData.created_at
+      <div class="profile__name">
+        <h1 class="profile__heading">
+          {{ props.githubProfileData.name }}
+        </h1>   
+        <a
+          class="profile__link" 
+          :href="'https://github.com/' + props.githubProfileData.login"
+        >
+          @{{ props.githubProfileData.login }}
+        </a>
+        <div class="profile__date">
+          Joined 
+          {{ props.githubProfileData.created_at.getDate() }}
+          {{ props.githubProfileData.created_at
             .toLocaleString('default', {'month': 'short'})
-        }}
-        {{ githubProfileData.created_at.getFullYear() }} 
+          }}
+          {{ props.githubProfileData.created_at.getFullYear() }} 
         </div>
       </div>
     </div>
-    <div class='profile__description'>
-      {{showUserBio(githubProfileData.bio)}}
+    <div class="profile__description">
+      {{ showUserBio(props.githubProfileData.bio) }}
     </div>
 
-    <div class='profile__stats'>
-      <div class='profile__repos'>
-        <div class='profile__statText'>Repos</div>
-        <div class='profile__statNum'>{{githubProfileData.public_repos}}</div>
+    <div class="profile__stats">
+      <div class="profile__repos">
+        <div class="profile__statText">
+          Repos
+        </div>
+        <div class="profile__statNum">
+          {{ props.githubProfileData.public_repos }}
+        </div>
       </div>
-      <div class='profile__followers'>
-        <div class='profile__statText'>Followers</div>
-        <div class='profile__statNum'>{{githubProfileData.followers}}</div>
+      <div class="profile__followers">
+        <div class="profile__statText">
+          Followers
+        </div>
+        <div class="profile__statNum">
+          {{ props.githubProfileData.followers }}
+        </div>
       </div>
-      <div class='profile__following'>
-        <div class='profile__statText'>Following</div>
-        <div class='profile__statNum'>{{githubProfileData.following}}</div>
+      <div class="profile__following">
+        <div class="profile__statText">
+          Following
+        </div>
+        <div class="profile__statNum">
+          {{ props.githubProfileData.following }}
+        </div>
       </div>
     </div>
 
-    <div class='profile__userInfo'>
-      <div class='profile__userDetail'>
+    <div class="profile__userInfo">
+      <div class="profile__userDetail">
         <picture>
-          <img :class='{inactive: !isValidUserInfo(githubProfileData.location)}'
-                class='profile__userInfoImg' 
-            src='../assets/img/icon-location.svg' alt='location'/>
+          <img
+            :class="{inactive: !isValidUserInfo(props.githubProfileData.location)}"
+            class="profile__userInfoImg" 
+            src="../assets/img/icon-location.svg"
+            alt="location"
+          >
         </picture>
-        <div :class='{inactive: !isValidUserInfo(githubProfileData.location)}' 
-              class='profile__userDetailInfo'>
-                {{showUserInfo(githubProfileData.location)}}
+        <div
+          :class="{inactive: !isValidUserInfo(props.githubProfileData.location)}" 
+          class="profile__userDetailInfo"
+        >
+          {{ showUserInfo(props.githubProfileData.location) }}
         </div>
-        
       </div>
-      <div class='profile__userDetail'>
+      <div class="profile__userDetail">
         <picture>
-          <img :class='{inactive: !isValidUserInfo(githubProfileData.blog)}'
-                class='profile__userInfoImg' 
-            src='../assets/img/icon-website.svg' alt='website'/>
+          <img
+            :class="{inactive: !isValidUserInfo(props.githubProfileData.blog)}"
+            class="profile__userInfoImg" 
+            src="../assets/img/icon-website.svg"
+            alt="website"
+          >
         </picture>
-        <div :class='{inactive: !isValidUserInfo(githubProfileData.blog)}'
-              class='profile__userDetailInfo'>
-          <a :href='showUserInfo(githubProfileData.blog)'>{{showUserInfo(githubProfileData.blog)}}</a>
+        <div
+          :class="{inactive: !isValidUserInfo(props.githubProfileData.blog)}"
+          class="profile__userDetailInfo"
+        >
+          <a :href="'https://' + props.githubProfileData.blog">{{ showUserInfo(props.githubProfileData.blog) }}</a>
         </div>
-
       </div>
-      <div class='profile__userDetail'>
+      <div class="profile__userDetail">
         <picture>
-          <img :class='{inactive: !isValidUserInfo(githubProfileData.twitter_username)}' 
-                class='profile__userInfoImg' 
-            src='../assets/img/icon-twitter.svg' alt='twitter'/>
+          <img
+            :class="{inactive: !isValidUserInfo(props.githubProfileData.twitter_username)}" 
+            class="profile__userInfoImg" 
+            src="../assets/img/icon-twitter.svg"
+            alt="twitter"
+          >
         </picture>
-        <div :class='{inactive: !isValidUserInfo(githubProfileData.twitter_username)}' 
-              class='profile__userDetailInfo'>{{showUserInfo(githubProfileData.twitter_username)}}</div>
-
+        <div
+          :class="{inactive: !isValidUserInfo(props.githubProfileData.twitter_username)}" 
+          class="profile__userDetailInfo"
+        >
+          {{ showUserInfo(props.githubProfileData.twitter_username) }}
+        </div>
       </div>
-      <div class='profile__userDetail'>
+      <div class="profile__userDetail">
         <picture>
-          <img :class='{inactive: !isValidUserInfo(githubProfileData.company)}' 
-                class='profile__userInfoImg' 
-            src='../assets/img/icon-company.svg' alt='work'/>
+          <img
+            :class="{inactive: !isValidUserInfo(props.githubProfileData.company)}" 
+            class="profile__userInfoImg" 
+            src="../assets/img/icon-company.svg"
+            alt="work"
+          >
         </picture>
-        <div :class='{inactive: !isValidUserInfo(githubProfileData.company)}' 
-              class='profile__userDetailInfo'>{{showUserInfo(githubProfileData.company)}}</div>
+        <div
+          :class="{inactive: !isValidUserInfo(props.githubProfileData.company)}" 
+          class="profile__userDetailInfo"
+        >
+          {{ showUserInfo(props.githubProfileData.company) }}
+        </div>
       </div>
     </div>
   </section>
 </template>
 
-<script>
-export default {
-  name: 'GithubProfile',
-  props: ['githubProfileData'],
-  methods: {
-    isValidUserInfo(info) {
-      return (info === null || info === '') ? false : true 
-    },
-    showUserInfo(info){
-      return (this.isValidUserInfo(info)) ? info : 'Not Available'
-    },
-    showUserBio(bio) {
-      return (bio === null) ? 'This profile has no bio available.' : bio;
-    },
-  }
-}
+<script setup>
+  import { defineProps } from 'vue'
+
+  const props = defineProps({
+    githubProfileData : {
+      type: Object,
+      required: true
+    }
+  })
+
+  const isValidUserInfo = (info) => (info === null || info === '') ? false : true
+  const showUserInfo = (info) => (isValidUserInfo(info)) ? info : 'Not Available'
+  const showUserBio = (bio) => (bio === null) ? 'This profile has no bio available.' : bio
+    
+
 </script>
 
 <style scoped>

@@ -1,14 +1,29 @@
 <template>
-  <section class='theme'> 
-    <h1 class='theme__heading'> devfinder </h1>
-    <div @click='changeTheme' class='theme__switcher'>
-      <span class='theme__type'>
-        <span v-if='currentTheme ==="light"'>dark</span>
+  <section class="theme"> 
+    <h1 class="theme__heading">
+      devfinder
+    </h1>
+    <div
+      class="theme__switcher"
+      @click="changeTheme"
+    >
+      <span class="theme__type">
+        <span v-if="currentTheme ===&quot;light&quot;">dark</span>
         <span v-else>light</span>
       </span>
-      <picture class='theme__picture'>
-        <img v-if='currentTheme === "light"' class='theme__img' src='../assets/img/icon-moon.svg' alt='moon'/> 
-        <img v-else class='theme__img' src='../assets/img/icon-sun.svg' alt='sun'/> 
+      <picture class="theme__picture">
+        <img
+          v-if="currentTheme === &quot;light&quot;"
+          class="theme__img"
+          src="../assets/img/icon-moon.svg"
+          alt="moon"
+        > 
+        <img
+          v-else
+          class="theme__img"
+          src="../assets/img/icon-sun.svg"
+          alt="sun"
+        > 
       </picture>
     </div>
   </section>

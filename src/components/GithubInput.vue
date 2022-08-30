@@ -1,20 +1,37 @@
 <template>
-  <ThemeSwitcher/>
-  <form class='searchForm' @submit.prevent>
-    <picture class='searchForm__picture'>
-      <img class='searchForm__img' src='../assets/img/icon-search.svg' alt='search-icon'/>
-    </picture> 
-    <input 
-       class='searchForm__input' 
-       type='text' 
-       placeholder='Search Github username... '
-       name='query'
-       v-model='query'
-     />
-    <button @click='getGithubUserData' class='searchForm__button'>Search</button>
-    <span v-if='isError' class='searchForm__error'>No results</span>
-  </form>
-  <GithubProfile :github-profile-data='githubProfileData'/>
+  <div class="githubInput">
+    <ThemeSwitcher />
+    <form
+      class="searchForm"
+      @submit.prevent
+    >
+      <picture class="searchForm__picture">
+        <img
+          class="searchForm__img"
+          src="../assets/img/icon-search.svg"
+          alt="search-icon"
+        >
+      </picture> 
+      <input 
+        v-model="query" 
+        class="searchForm__input" 
+        type="text"
+        placeholder="Search Github username... "
+        name="query"
+      >
+      <button
+        class="searchForm__button"
+        @click="getGithubUserData"
+      >
+        Search
+      </button>
+      <span
+        v-if="isError"
+        class="searchForm__error"
+      >No results</span>
+    </form>
+    <GithubProfile :github-profile-data="githubProfileData" />
+  </div>
 </template>
 
 <script setup>
@@ -51,8 +68,9 @@
       })
       Object.assign(githubProfileData, response.data)
       githubProfileData.created_at = new Date(response.data.created_at)
+      console.log(githubProfileData.blog)
     } catch (error){
-        isError.value = error.status == 404
+        isError.value = error.status === 404
     }
   }
 </script>
