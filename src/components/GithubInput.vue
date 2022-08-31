@@ -63,11 +63,13 @@
     const ACCESS_TOKEN = process.env.ACCESS_TOKEN 
     const octokit = new Octokit({ auth: ACCESS_TOKEN }) 
     try {
-      const response = await octokit.request('GET /users/{username}', {
-        username: query.value
-      })
-      Object.assign(githubProfileData, response.data)
-      githubProfileData.created_at = new Date(response.data.created_at)
+      if(query.value.trim().length > 0){
+        const response = await octokit.request('GET /users/{username}', {
+          username: query.value
+        })
+        Object.assign(githubProfileData, response.data)
+        githubProfileData.created_at = new Date(response.data.created_at)
+      }
     } catch (error){
         isError.value = error.status === 404
     }
