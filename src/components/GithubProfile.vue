@@ -138,8 +138,8 @@
     }
   })
 
-  const isValidUserInfo = (info) => (info === null || info === '') ? false : true
-  const showUserInfo = (info) => (isValidUserInfo(info)) ? info : 'Not Available'
+  const isValidUserInfo = (info) => (info) ? true : false 
+  const showUserInfo = (info) => info || 'Not Available'
   const showUserBio = computed(() => props.githubProfileData.bio || 'This profile has no bio available.'
   )
     
