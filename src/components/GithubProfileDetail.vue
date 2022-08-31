@@ -13,7 +13,7 @@
       :class="{inactive: isInactive()}" 
       class="profile__userDetailInfo"
     >
-    <a v-if="isLink()" :href="'https://' + props.link">{{ showUserInfo }}</a>
+    <a v-if="linkExists()" :href="'https://' + props.link">{{ showUserInfo }}</a>
     <span v-else> {{showUserInfo}} </span>
     </div>
   </div>
@@ -45,7 +45,7 @@
     
   })
   
-  const isLink = () => (props.link) ? true : false
+  const linkExists= () => (props.link) ? true : false
   const isInactive = () => (props.githubUserInfo) ? false : true 
   const showUserInfo = computed(() => props.githubUserInfo || 'Not Available' )
 </script>
