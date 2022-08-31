@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="profile__description">
-      {{ showUserBio(props.githubProfileData.bio) }}
+      {{ showUserBio }}
     </div>
 
     <div class="profile__stats">
@@ -129,7 +129,7 @@
 </template>
 
 <script setup>
-  import { defineProps } from 'vue'
+  import {computed, defineProps } from 'vue'
 
   const props = defineProps({
     githubProfileData : {
@@ -140,7 +140,8 @@
 
   const isValidUserInfo = (info) => (info === null || info === '') ? false : true
   const showUserInfo = (info) => (isValidUserInfo(info)) ? info : 'Not Available'
-  const showUserBio = (bio) => (bio === null) ? 'This profile has no bio available.' : bio
+  const showUserBio = computed(() => props.githubProfileData.bio || 'This profile has no bio available.'
+  )
     
 
 </script>
