@@ -188,7 +188,7 @@
       display: grid;
       grid-auto-flow: column;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 40px 40px;
+      grid-template-rows: fit-content(100%) fit-content(100%);
       justify-content: center;
     }
   }
