@@ -68,7 +68,6 @@
       })
       Object.assign(githubProfileData, response.data)
       githubProfileData.created_at = new Date(response.data.created_at)
-      console.log(githubProfileData.blog)
     } catch (error){
         isError.value = error.status === 404
     }

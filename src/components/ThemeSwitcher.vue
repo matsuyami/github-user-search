@@ -29,55 +29,44 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: 'ThemeSwitcher',
-  data() {
-    return {
-      currentTheme: this.initializeTheme(),  
+<script setup>
+  import { ref } from 'vue'
+  const THEME = 'theme'
+
+  const getStoredTheme = () => {
+    const defaultTheme='light'
+    const currentTheme = localStorage.getItem(THEME)
+    return (currentTheme) ? currentTheme : defaultTheme 
+  }
+
+  const initializeTheme = () => {
+    const storedTheme = getStoredTheme()
+    document.body.classList.add(storedTheme)
+    return storedTheme
+  }
+
+  const currentTheme = ref(initializeTheme())
+  const setStoredTheme = (currentTheme) => localStorage.setItem(THEME, currentTheme)
+
+  const swapThemeClasses = (newTheme) => {
+    document.body.classList.remove(currentTheme.value)
+    currentTheme.value = newTheme 
+    document.body.classList.add(newTheme)
+    setStoredTheme(currentTheme.value)
+  }
+
+  const changeTheme = () => {
+    const light = 'light'
+    const dark = 'dark'
+    switch(currentTheme.value){
+      case light:
+        swapThemeClasses(dark)
+        break;
+      case dark:
+        swapThemeClasses(light)
+        break
     }
-  }, 
-  methods: {
-     initializeTheme() {
-       const storedTheme = this.getStoredTheme()
-       document.body.classList.add(storedTheme)
-       return storedTheme
-     },
-
-     getStoredTheme() {
-       const defaultTheme='light'
-       const key = 'theme'
-       const currentTheme = localStorage.getItem(key)
-       return (currentTheme) ? currentTheme : defaultTheme 
-     },
-
-     setStoredTheme(currentTheme) {
-       const key = 'theme'
-       localStorage.setItem(key, currentTheme)
-     },
-
-    changeTheme(){
-      const light = 'light'
-      const dark = 'dark'
-      switch(this.currentTheme){
-        case light:
-          this.swapThemeClasses(dark)
-          break;
-        case dark:
-          this.swapThemeClasses(light)
-          break
-      }
-    },
-     swapThemeClasses(newTheme) {
-       document.body.classList.remove(this.currentTheme)
-       this.currentTheme = newTheme 
-       document.body.classList.add(newTheme)
-       this.setStoredTheme(this.currentTheme)
-     }
-  },
-
-
-}
+  }
 </script>
 
 <style>
