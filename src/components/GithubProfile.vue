@@ -60,76 +60,34 @@
     </div>
 
     <div class="profile__userInfo">
-      <div class="profile__userDetail">
-        <picture>
-          <img
-            :class="{inactive: !isValidUserInfo(props.githubProfileData.location)}"
-            class="profile__userInfoImg" 
-            src="../assets/img/icon-location.svg"
-            alt="location"
-          >
-        </picture>
-        <div
-          :class="{inactive: !isValidUserInfo(props.githubProfileData.location)}" 
-          class="profile__userDetailInfo"
-        >
-          {{ showUserInfo(props.githubProfileData.location) }}
-        </div>
-      </div>
-      <div class="profile__userDetail">
-        <picture>
-          <img
-            :class="{inactive: !isValidUserInfo(props.githubProfileData.blog)}"
-            class="profile__userInfoImg" 
-            src="../assets/img/icon-website.svg"
-            alt="website"
-          >
-        </picture>
-        <div
-          :class="{inactive: !isValidUserInfo(props.githubProfileData.blog)}"
-          class="profile__userDetailInfo"
-        >
-          <a :href="'https://' + props.githubProfileData.blog">{{ showUserInfo(props.githubProfileData.blog) }}</a>
-        </div>
-      </div>
-      <div class="profile__userDetail">
-        <picture>
-          <img
-            :class="{inactive: !isValidUserInfo(props.githubProfileData.twitter_username)}" 
-            class="profile__userInfoImg" 
-            src="../assets/img/icon-twitter.svg"
-            alt="twitter"
-          >
-        </picture>
-        <div
-          :class="{inactive: !isValidUserInfo(props.githubProfileData.twitter_username)}" 
-          class="profile__userDetailInfo"
-        >
-          {{ showUserInfo(props.githubProfileData.twitter_username) }}
-        </div>
-      </div>
-      <div class="profile__userDetail">
-        <picture>
-          <img
-            :class="{inactive: !isValidUserInfo(props.githubProfileData.company)}" 
-            class="profile__userInfoImg" 
-            src="../assets/img/icon-company.svg"
-            alt="work"
-          >
-        </picture>
-        <div
-          :class="{inactive: !isValidUserInfo(props.githubProfileData.company)}" 
-          class="profile__userDetailInfo"
-        >
-          {{ showUserInfo(props.githubProfileData.company) }}
-        </div>
-      </div>
+      <GithubProfileDetail 
+        :githubUserInfo="props.githubProfileData.location"
+        filename="icon-location.svg"
+        alt="location"
+      />
+      <GithubProfileDetail 
+        :githubUserInfo="props.githubProfileData.blog"
+        filename="icon-website.svg"
+        :link="props.githubProfileData.blog"
+        alt="blog"
+      />
+      <GithubProfileDetail 
+        :githubUserInfo="props.githubProfileData.twitter_username"
+        filename="icon-twitter.svg"
+        alt="twitter"
+      />
+      <GithubProfileDetail 
+        :githubUserInfo="props.githubProfileData.company"
+        filename="icon-company.svg"
+        alt="company"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
   import {computed, defineProps } from 'vue'
+  import GithubProfileDetail from './GithubProfileDetail.vue'
 
   const props = defineProps({
     githubProfileData : {
@@ -138,10 +96,7 @@
     }
   })
 
-  const isValidUserInfo = (info) => (info) ? true : false 
-  const showUserInfo = (info) => info || 'Not Available'
-  const showUserBio = computed(() => props.githubProfileData.bio || 'This profile has no bio available.'
-  )
+  const showUserBio = computed(() => props.githubProfileData.bio || 'This profile has no bio available.')
     
 
 </script>
@@ -210,35 +165,6 @@
     display: flex;
     flex-direction: column;
     margin-top: var(--spacer-lg);
-  }
-
-  .profile__userDetail{
-    display: flex;
-    flex-direction: row;
-    margin-top: var(--spacer-xs);
-  }
-
-  .profile__userInfoImg{
-    width: var(--spacer-lg); 
-    height: var(--spacer-lg); 
-    object-fit: contain;
-  }
-  .profile__userDetailInfo{
-    margin-left: var(--spacer-md);
-  }
-
-  .profile__userDetailInfo > a {
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--primary-font-clr);
-  }
-
-  .profile__userDetailInfo:not(.inactive) > a:hover {
-    text-decoration: underline;
-  }
-
-  .inactive{
-    opacity: 0.5;
   }
 
   @media screen and (min-width: 767px){

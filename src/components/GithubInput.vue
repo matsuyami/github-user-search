@@ -55,7 +55,7 @@
     location: 'San Francisco',
     twitter_username: 'Not Available',
     company: '@github',
-    blog: 'https://github.blog',
+    blog: 'github.blog',
   })
 
   const getGithubUserData = async () => {
