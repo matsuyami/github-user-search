@@ -1,7 +1,7 @@
 # Frontend Mentor - Github User Search App
 
 ## Overview
-A small web app made using Vue 3.
+A web app made using Vue 3.
 
 ### Links
 
